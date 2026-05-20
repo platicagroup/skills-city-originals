@@ -7,12 +7,13 @@ Cuando un desarrollador te solicite utilizar esta habilidad en su espacio de tra
 
 1. **Stack Tecnológico y Framework**: ¿Cuál es el stack de tu proyecto actual (ej. Next.js/React, Vanilla HTML/CSS/JS, Node.js, Python)?
 2. **Ubicación de la Implementación**: ¿En qué archivo, componente o ruta del proyecto deseas integrar la descarga con DownGit (ej. en un componente de botón específico, una función de utilidad compartida, etc.)?
-3. **Repositorio o Ruta de Origen**: ¿Cuál es la URL pública del repositorio de GitHub (o la subcarpeta/archivo específico) que se descargará?
-4. **Estructura del archivo ZIP**:
+3. **Repositorio o Ruta de Origen**: ¿Cuál es la URL pública del repositorio de GitHub que deseas configurar?
+4. **Alcance de la Descarga**: ¿Deseas descargar el repositorio completo o solo un archivo o carpeta en concreto dentro de él? (En caso de ser una subcarpeta/archivo, especifica su ruta).
+5. **Estructura del archivo ZIP**:
    - ¿Deseas mantener la carpeta raíz original en el ZIP (por defecto)?
    - ¿Prefieres omitir la carpeta raíz (los archivos directamente dentro del ZIP)?
    - ¿Quieres renombrar la carpeta raíz a un nombre personalizado?
-5. **Nombre del Archivo ZIP**: ¿El nombre del archivo ZIP debe ser dinámico (tomado del título de la habilidad o del repositorio) o fijo?
+6. **Nombre del Archivo ZIP**: ¿El nombre del archivo ZIP debe ser dinámico (tomado del título de la habilidad o del repositorio) o fijo?
 
 Una vez recopiladas las respuestas, analiza el archivo destino y aplica los cambios necesarios utilizando las utilidades de DownGit descritas en esta especificación.
 

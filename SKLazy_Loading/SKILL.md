@@ -5,6 +5,7 @@ description: >-
 ---
 
 # Skill de Carga Progresiva y Segundo Plano (Lazy Loading) - V1
+Guidelines, templates, and patterns for implementing progressive and background loading patterns in Next.js/React grids.
 
 ## Resumen
 Esta habilidad detalla las mejores prácticas para acelerar el tiempo de carga percibido en páginas web con grandes listados de datos provenientes de Supabase o bases de datos externas. Se enfoca en la carga inicial rápida (bloque prioritario) seguida de una hidratación progresiva en segundo plano (non-blocking).

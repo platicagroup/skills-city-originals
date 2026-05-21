@@ -5,6 +5,7 @@ description: >-
 ---
 
 # Next.js SEO Optimization Skill
+Guia y flujo de trabajo para optimizar el SEO en aplicaciones Next.js App Router, solucionando conflictos de metadatos en componentes de cliente e implementando SEO dinamico.
 
 ## Overview
 Esta skill describe el proceso tecnico y flujo de diseño para implementar optimizaciones de SEO premium en aplicaciones Next.js que utilizan App Router, resolviendo incompatibilidades entre componentes interactivos de cliente (`"use client"`) y la exportacion de metadatos estaticos y dinamicos en el servidor.

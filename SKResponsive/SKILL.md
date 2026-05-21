@@ -5,6 +5,7 @@ description: >-
 ---
 
 # Next.js Responsiveness Skill
+Guidelines and patterns for making Next.js pages, CSS modules, headers, pagination, and modals responsive.
 
 ## Overview
 This skill outlines the process and best practices for converting desktop-first Next.js pages and components to mobile-friendly responsive designs using CSS Modules and media queries.

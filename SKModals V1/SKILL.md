@@ -5,6 +5,7 @@ description: >-
 ---
 
 # Skill de Creación de Modales de Estado (Éxito, Error y Fallo) - V1
+Guidelines, templates, and patterns for creating dark-themed, glassmorphic success, error, and failure modals in React/Next.js.
 
 ## Resumen
 Esta habilidad detalla el flujo de trabajo, los patrones de diseño y las plantillas de código para crear e integrar modales de estado (éxito, error y fallos de autenticación o procesos) con una estética de terminal retro-moderna premium utilizando React/Next.js y CSS Modules.

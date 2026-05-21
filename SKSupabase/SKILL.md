@@ -1,5 +1,5 @@
 # Protección de Contraseñas Filtradas en Supabase (Leaked Password Protection)
-// Description: Especificación y guía paso a paso para habilitar y configurar la protección contra contraseñas comprometidas (filtradas) en Supabase Auth, integrando la validación contra HaveIBeenPwned.org.
+Especificación y guía paso a paso para habilitar y configurar la protección contra contraseñas comprometidas (filtradas) en Supabase Auth, integrando la validación contra HaveIBeenPwned.org.
 
 ## Guía de Ejecución Interactiva (Instrucciones para el Agente)
 

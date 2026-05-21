@@ -5,6 +5,7 @@ description: >-
 ---
 
 # Skill de Integración de Vercel Analytics - V1
+Guidelines, templates, and procedures for integrating Vercel Analytics into a Next.js/React application.
 
 ## Resumen
 Esta habilidad especifica el proceso paso a paso para añadir y configurar Vercel Analytics en una aplicación web basada en Next.js (App Router), permitiendo recolectar métricas de visitas y rendimiento del sitio en tiempo real de manera nativa y con impacto de rendimiento mínimo.

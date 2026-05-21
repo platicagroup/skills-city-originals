@@ -1,5 +1,5 @@
 # Generación de Enlaces DownGit
-// Description: Guía y especificación para la creación de enlaces de descarga directa de carpetas y archivos específicos de repositorios de GitHub usando DownGit.
+Guía y especificación para la creación de enlaces de descarga directa de carpetas y archivos específicos de repositorios de GitHub usando DownGit.
 
 ## Guía de Ejecución Interactiva (Instrucciones para el Agente)
 

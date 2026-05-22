@@ -1,14 +1,13 @@
 ---
 name: sk-seo-optimizer
-description: >-
-  Guia y flujo de trabajo para optimizar el SEO en aplicaciones Next.js App Router, solucionando conflictos de metadatos en componentes de cliente e implementando SEO dinamico.
+description: Guía y flujo de trabajo avanzado para optimizar el SEO en aplicaciones Next.js App Router, incluyendo metadatos de servidor, JSON-LD estructurado, sitemaps dinámicos y configuración de robots.
 ---
 
 # Next.js SEO Optimization Skill
-Guia y flujo de trabajo para optimizar el SEO en aplicaciones Next.js App Router, solucionando conflictos de metadatos en componentes de cliente e implementando SEO dinamico.
+Guía y flujo de trabajo avanzado para optimizar el SEO en aplicaciones Next.js App Router, solucionando conflictos de metadatos en componentes de cliente, implementando SEO dinámico, datos estructurados (JSON-LD), sitemaps y directivas de robots.
 
 ## Overview
-Esta skill describe el proceso tecnico y flujo de diseño para implementar optimizaciones de SEO premium en aplicaciones Next.js que utilizan App Router, resolviendo incompatibilidades entre componentes interactivos de cliente (`"use client"`) y la exportacion de metadatos estaticos y dinamicos en el servidor.
+Esta skill describe el proceso técnico y flujo de diseño para implementar optimizaciones de SEO premium en aplicaciones Next.js que utilizan App Router, resolviendo incompatibilidades entre componentes interactivos de cliente (`"use client"`) y la exportación de metadatos, estructurando datos para motores de búsqueda y configurando sitemaps automatizados.
 
 ## Dependencies
 - Next.js 13+ (App Router)
@@ -16,26 +15,26 @@ Esta skill describe el proceso tecnico y flujo de diseño para implementar optim
 - TypeScript (Recomendado)
 
 ## Quick Start
-Para aplicar esta skill:
-1. Inspecciona si las paginas de tu aplicacion contienen la directiva `"use client"` al inicio y si heredan metadatos globales genericos en lugar de tener metadatos dedicados.
-2. Identifica si tienes rutas dinamicas (por ejemplo, `[id]`) que necesiten SEO dinamico.
-3. Sigue el flujo detallado a continuacion para reestructurar el sitio y añadir metadatos asincronos.
+1. Inspecciona si las páginas de tu aplicación contienen la directiva `"use client"` al inicio y si heredan metadatos globales genéricos en lugar de tener metadatos dedicados.
+2. Identifica si tienes rutas dinámicas (por ejemplo, `[id]`) que necesiten SEO dinámico.
+3. Sigue el flujo detallado a continuación para reestructurar el sitio, añadir metadatos asíncronos, configurar datos estructurados JSON-LD, canonicals, sitemaps y robots.
 
 ---
 
 ## Workflow
 
-### 1. Auditoria e Identificacion de Problemas
-- **Idioma y Localizacion**: Comprueba si el idioma declarado en `layout.tsx` (`<html lang="en">`) coincide con el idioma principal del contenido de la web.
-- **Paginas Clientes con "use client"**: Identifica las paginas que inician con `"use client"` debido a que usan React hooks (`useState`, `useEffect`, context, etc.). Estas paginas no pueden exportar `metadata` de forma directa.
-- **Rutas Dinamicas**: Comprueba si paginas como articulos de blog o fichas tecnicas cargan datos desde una API o base de datos y carecen de previsualizacion en redes sociales.
+### 1. Auditoría e Identificación de Problemas
+- **Idioma y Localización**: Comprueba si el idioma declarado en `layout.tsx` (`<html lang="es">` o el correspondiente) coincide con el idioma principal del contenido de la web.
+- **Páginas Clientes con "use client"**: Identifica las páginas que inician con `"use client"` debido a que usan React hooks (`useState`, `useEffect`, context, etc.). Estas páginas no pueden exportar `metadata` de forma directa.
+- **Rutas Dinámicas**: Comprueba si las páginas dinámicas cargan datos desde una API o base de datos y carecen de previsualización en redes sociales.
+- **Jerarquía Semántica (H1 Único)**: Asegura que cada página HTML contenga exactamente una etiqueta `<h1>`. Si el diseño visual no requiere un H1 visible o usa estilos alternativos, utiliza un encabezado oculto para accesibilidad y rastreadores utilizando clases como `.srOnly` (CSS `position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;`).
 
-### 2. Arquitectura de Separacion Servidor/Cliente
-Para mantener la interactividad del lado del cliente y aun asi permitir que Next.js renderice los metadatos desde el servidor para los rastreadores SEO:
-- Extrae la logica visual e interactiva de `page.tsx` a un nuevo archivo en el mismo directorio llamado `[PageName]Client.tsx` (ejemplo: `HomeClient.tsx`, `BlogClient.tsx`, `ComunidadClient.tsx`).
+### 2. Arquitectura de Separación Servidor/Cliente
+Para mantener la interactividad del lado del cliente y aun así permitir que Next.js renderice los metadatos desde el servidor para los rastreadores SEO:
+- Extrae la lógica visual e interactiva de `page.tsx` a un nuevo archivo en el mismo directorio llamado `[PageName]Client.tsx` (ejemplo: `HomeClient.tsx`, `BlogClient.tsx`, `ComunidadClient.tsx`).
 - Define `"use client"` en la cabecera de este nuevo componente cliente.
-- Reemplaza el archivo `page.tsx` original convirtiendolo en un Server Component.
-- Importa el componente cliente y exporta el objeto `metadata` de forma estatica.
+- Reemplaza el archivo `page.tsx` original convirtiéndolo en un Server Component.
+- Importa el componente cliente y exporta el objeto `metadata` de forma estática.
 
 *Ejemplo de `page.tsx` (Server Component):*
 ```tsx
@@ -43,12 +42,21 @@ import ComunidadClient from "./ComunidadClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Comunidad",
-  description: "Únete a la red global de desarrolladores. Comparte, colabora y debate sobre el futuro de los agentes autonomos.",
+  title: "Comunidad de Desarrolladores de Agentes de IA | NombreSitio",
+  description: "Únete a la comunidad de creadores de Agent Skills. Comparte código, debate arquitecturas de agentes autónomos y colabora en proyectos.",
+  alternates: {
+    canonical: "/comunidad",
+  },
   openGraph: {
-    title: "Comunidad | Plataforma",
-    description: "Únete a la red global de desarrolladores de la plataforma.",
+    title: "Comunidad de Desarrolladores de Agentes de IA | NombreSitio",
+    description: "Únete a la comunidad de creadores de Agent Skills. Comparte código, debate arquitecturas de agentes autónomos y colabora en proyectos.",
     type: "website",
+    url: "https://tusitio.com/comunidad",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Comunidad de Desarrolladores de Agentes de IA | NombreSitio",
+    description: "Únete a la comunidad de creadores de Agent Skills. Comparte código, debate arquitecturas de agentes autónomos y colabora en proyectos.",
   },
 };
 
@@ -57,32 +65,114 @@ export default function Page() {
 }
 ```
 
-### 3. Configuracion de Metadatos Globales (`layout.tsx`)
-Actualiza el layout raiz para proveer un sistema robusto de metadatos globales:
-- **`metadataBase`**: Configura una URL de origen para evitar errores al resolver rutas relativas de imagenes de Open Graph o Twitter.
+### 3. Reglas de Metadatos y Enlaces Canónicos
+- **Límites de Caracteres**: 
+  - El título (`title`) debe mantenerse por debajo de **60 caracteres** para evitar que se recorte en las SERPs (páginas de resultados de búsqueda).
+  - La descripción (`description`) debe mantenerse por debajo de **155 caracteres** y contener palabras clave relevantes sin saturarlas artificialmente.
+- **Enlaces Canónicos (`alternates.canonical`)**: Añade siempre la ruta canonical relativa o absoluta correspondiente para evitar la indexación de páginas duplicadas (causadas por parámetros de búsqueda, barras inclinadas finales o alias de dominio).
+
+### 4. Datos Estructurados JSON-LD
+Los datos estructurados ayudan a los motores de búsqueda a entender el contexto de tu contenido y habilitan Rich Snippets en Google.
+- Inyecta JSON-LD usando la etiqueta `<script type="application/ld+json">` dentro de tus Server Components.
+- Utiliza la estructura `@graph` para consolidar todas las entidades (como `Organization`, `WebSite`, `WebPage`, `Blog` o `BlogPosting`) de forma interconectada mediante identificadores únicos (`@id`).
+
+*Ejemplo de integración de datos estructurados:*
+```tsx
+export default function Page() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://tusitio.com/comunidad#webpage",
+        "url": "https://tusitio.com/comunidad",
+        "name": "Comunidad de Desarrolladores de Agentes de IA",
+        "isPartOf": {
+          "@id": "https://tusitio.com/#website"
+        },
+        "description": "Únete a la comunidad de creadores de Agent Skills."
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ComunidadClient />
+    </>
+  );
+}
+```
+
+### 5. Configuración de Sitemap y Robots
+Para garantizar que Google y otros rastreadores descubran y prioricen adecuadamente todas tus páginas clave, utiliza las capacidades integradas de Next.js App Router para generar archivos `sitemap.xml` y `robots.txt`.
+
+- **Sitemap Dinámico (`src/app/sitemap.ts`)**:
   ```typescript
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://tusitio.com"),
-  ```
-- **Plantilla de Titulo**: Usa un objeto de titulo con `default` y `template` para que las subpaginas añadan sufijos automaticamente.
-  ```typescript
-  title: {
-    default: "NombreSitio - Descripcion Corta",
-    template: "%s | NombreSitio",
+  import { MetadataRoute } from "next";
+
+  export default function sitemap(): MetadataRoute.Sitemap {
+    const baseUrl = "https://tusitio.com";
+    return [
+      {
+        url: baseUrl,
+        lastModified: new Date(),
+        changeFrequency: "daily",
+        priority: 1.0,
+      },
+      {
+        url: `${baseUrl}/blog`,
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/changelog`,
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/comunidad`,
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.8,
+      },
+    ];
   }
   ```
-- **Open Graph y Twitter**: Declara imagenes de marca, nombres de sitio, localizaciones y configuraciones de rastreadores (`robots`).
 
-### 4. Implementacion de SEO Dinamico (`generateMetadata`)
-En rutas dinamicas como `[id]/page.tsx`, implementa la funcion asincrona `generateMetadata` de Next.js.
-- Crea un helper de fetching de datos (ejemplo: `getSkill(id)`) que pueda ser compartido tanto por `generateMetadata` como por el componente principal de la pagina.
-- Ejecuta la consulta de base de datos o API en `generateMetadata` para extraer los campos `title` y `description` especificos de cada elemento.
+- **Robots.txt (`src/app/robots.ts`)**:
+  ```typescript
+  import { MetadataRoute } from "next";
+
+  export default function robots(): MetadataRoute.Robots {
+    const baseUrl = "https://tusitio.com";
+    return {
+      rules: {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/admin/", "/api/"],
+      },
+      sitemap: `${baseUrl}/sitemap.xml`,
+    };
+  }
+  ```
+
+### 6. Implementación de SEO Dinámico (`generateMetadata`)
+En rutas dinámicas como `[id]/page.tsx`, implementa la función asíncrona `generateMetadata` de Next.js.
+- Crea un helper de fetching de datos (ejemplo: `getSkill(id)`) que pueda ser compartido tanto por `generateMetadata` como por el componente principal de la página.
+- Ejecuta la consulta de base de datos o API en `generateMetadata` para extraer los campos `title` y `description` específicos de cada elemento.
 
 *Ejemplo en `[id]/page.tsx`:*
 ```tsx
 import type { Metadata } from "next";
 
 async function getSkill(id: string) {
-  // fetch asincrono de base de datos
+  // fetch asíncrono de base de datos
   const data = await db.fetchSkill(id);
   return data;
 }
@@ -94,12 +184,12 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   if (!skill) {
     return {
       title: "Elemento No Encontrado",
-      description: "El recurso solicitado no esta disponible.",
+      description: "El recurso solicitado no está disponible.",
     };
   }
 
   return {
-    title: skill.title,
+    title: `${skill.title} | Plataforma`,
     description: skill.desc,
     openGraph: {
       title: `${skill.title} | Plataforma`,
@@ -117,27 +207,23 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 }
 ```
 
-### 5. Compilacion y Verificacion
-- Ejecuta `npm run build` o `next build`.
-- Verifica que Next.js no emita advertencias relativas a la falta de `metadataBase`.
-- Asegura que las paginas dinamicas se clasifiquen como `ƒ (Dynamic)` o `○ (Static)` segun corresponda sin fallas en el build de produccion.
+---
+
+## Cómo Funciona
+Next.js procesa los Server Components en el servidor y extrae las definiciones de `metadata` o el resultado de `generateMetadata` antes de enviar la respuesta HTML inicial. El motor de búsqueda (o rastreadores de Discord, Slack y Twitter) recibe un archivo HTML plano estructurado con etiquetas `<title>`, `<meta name="description">` y propiedades `<meta property="og:*">` completamente formadas.
+Esto elimina la necesidad de depender de técnicas de renderizado en el cliente (Client-Side Rendering) que a menudo resultan en previsualizaciones vacías o indexaciones fallidas en bots que no ejecutan JavaScript de forma avanzada.
 
 ---
 
-## Como Funciona
-Next.js procesa los Server Components en el servidor y extrae las definiciones de `metadata` o el resultado de `generateMetadata` antes de enviar la respuesta HTTP inicial. El motor de busqueda (o rastreadores de Discord, Slack y Twitter) recibe un archivo HTML plano estructurado con etiquetas `<title>`, `<meta name="description">` y propiedades `<meta property="og:*">` completamente formadas.
-Esto elimina la necesidad de depender de tecnicas de renderizado en el cliente (Client-Side Rendering) que a menudo resultan en previsualizaciones vacias o indexaciones fallidas en bots que no ejecutan JavaScript de forma avanzada.
-
----
-
-## Para Quienes Funciona
-- **Desarrolladores Next.js**: Que buscan estructurar correctamente la indexacion utilizando la API oficial de metadatos de Next.js en arquitecturas de App Router.
-- **Sitios Web Interactivos (SPAs hibridas)**: Que necesitan conservar el estado de React (`"use client"`) en la interfaz de usuario pero no quieren sacrificar el SEO individual de cada seccion.
-- **Plataformas Dinamicas**: Repositorios de codigo, blogs, tiendas online y foros que generan cientos de paginas basadas en IDs o slugs unicos, garantizando que cada enlace compartido contenga su previsualizacion enriquecida de forma automatica.
+## Para Quiénes Funciona
+- **Desarrolladores Next.js**: Que buscan estructurar correctamente la indexación utilizando la API oficial de metadatos de Next.js en arquitecturas de App Router.
+- **Sitios Web Interactivos (SPAs híbridas)**: Que necesitan conservar el estado de React (`"use client"`) en la interfaz de usuario pero no quieren sacrificar el SEO individual de cada sección.
+- **Plataformas Dinámicas**: Repositorios de código, blogs, tiendas online y foros que generan cientos de páginas basadas en IDs o slugs únicos, garantizando que cada enlace compartido contenga su previsualización enriquecida de forma automática.
 
 ---
 
 ## Errores Comunes
-- **Declarar "use client" y metadatos en el mismo archivo**: Provocara un error en el compilador de Next.js indicando que las exportaciones de metadatos solo estan permitidas en Server Components.
-- **Ignorar el parametro asincrono de params**: En versiones recientes de Next.js, `params` debe ser esperado asincronamente (`await params`), de lo contrario fallara en el runtime.
-- **Olvidar metadatos Open Graph especificos para Twitter**: Algunas plataformas dependen exclusivamente de etiquetas og:* mientras que otras requieren twitter:card para renderizar previsualizaciones completas.
+- **Declarar "use client" y metadatos en el mismo archivo**: Provocará un error en el compilador de Next.js indicando que las exportaciones de metadatos solo están permitidas en Server Components.
+- **Ignorar el parámetro asíncrono de params**: En versiones recientes de Next.js, `params` debe ser esperado asíncronamente (`await params`), de lo contrario fallará en el runtime.
+- **Olvidar metadatos Open Graph específicos para Twitter**: Algunas plataformas dependen exclusivamente de etiquetas og:* mientras que otras requieren twitter:card para renderizar previsualizaciones completas.
+- **No definir una `metadataBase`**: Causa que las imágenes con rutas relativas fallen en resolverse a URLs completas absolutas, arruinando la previsualización en redes sociales y servicios de mensajería.

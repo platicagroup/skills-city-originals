@@ -58,6 +58,15 @@ El repositorio está organizado en subdirectorios temáticos para cada habilidad
   - Integración del componente de analíticas en App Router y Pages Router.
   - Habilitación y diagnóstico de analíticas desde el Dashboard de Vercel.
 
+### 8. SKCache_V1
+* **Nombre de la habilidad**: `sk-caching`
+* **Descripción**: Directrices y patrones para la implementación de caché de almacenamiento local (sessionStorage/localStorage) con carga progresiva en segundo plano (SWR) y control de fuerza de refresco en mutaciones.
+* **Componentes clave**:
+  - Renderizado instantáneo SWR desde almacenamiento local.
+  - Sincronización asíncrona de datos en segundo plano.
+  - Invalidación/limpieza de caché en acciones de escritura.
+  - Prevención de condiciones de carrera mediante query refs.
+
 ---
 
 ## Cómo utilizar estas Habilidades

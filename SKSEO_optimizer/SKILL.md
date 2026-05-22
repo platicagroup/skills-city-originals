@@ -207,6 +207,22 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 }
 ```
 
+### 7. Proceso de Indexación Guiada y Registro en Google Search Console
+Una vez completadas todas las configuraciones técnicas del lado del servidor, el último paso obligatorio consiste en guiar al buscador para que descubra e indexe la aplicación de manera acelerada:
+
+1. **Alineación de Dominios**: Asegura que las propiedades `metadataBase`, sitemaps, robots.txt y canonicals coincidan exactamente con la URL de despliegue de producción activa (ej. `https://tusitio.vercel.app` para entornos de pruebas en Vercel, o el dominio definitivo `https://tusitio.com`).
+2. **Crear la Propiedad**: Accede a [Google Search Console](https://search.google.com/search-console) y añade una propiedad de tipo **Prefijo de la URL** con el enlace exacto del despliegue activo.
+3. **Verificar Propiedad**:
+   - Selecciona el método de verificación por **Archivo HTML**.
+   - Descarga el archivo de verificación (normalmente llamado `google[codigo].html`).
+   - Crea un archivo con ese nombre exacto dentro del directorio `public/` del proyecto de frontend. El contenido interno del archivo debe ser la línea proporcionada (ej: `google-site-verification: google[codigo].html`).
+   - Realiza un `git commit` y `git push` para desplegar el archivo en el servidor.
+   - Confirma que el archivo sea accesible públicamente desde el navegador en `https://tusitio.vercel.app/google[codigo].html` y pulsa **Verificar** en la Search Console.
+4. **Enviar el Mapa del Sitio**: En el apartado lateral de **Sitemaps**, ingresa la ruta `sitemap.xml` y haz clic en **Enviar** para que Google conozca todas las rutas válidas.
+5. **Inspección e Indexación Manual**:
+   - Utiliza la herramienta de inspección de URLs en la barra de búsqueda superior de la Search Console para evaluar la URL raíz (`https://tusitio.vercel.app/`).
+   - Haz clic en **Solicitar indexación** para forzar a Googlebot a procesar la página inmediatamente en lugar de esperar al rastreo periódico convencional.
+
 ---
 
 ## Cómo Funciona
